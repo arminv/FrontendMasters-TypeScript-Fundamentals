@@ -1,0 +1,14 @@
+{
+    // What kind of compiler options (module, ES version, etc.):
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2017",
+        // Where to leave the compiled files:
+        "outDir": "lib",
+        // These two options specify if we want to enforce type declaration:
+        "declaration": true,
+        "sourceMap": true
+    },
+    // Specify the source file that need to be compiled (e.g. all files in `src` folder in this case):
+    "include": ["src"]
+}
