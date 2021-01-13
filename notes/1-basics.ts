@@ -3,22 +3,22 @@
 /**
  * (1) x is a string, b/c we’ve initialized it
  */
-// let x = "hello world";
+let x = "hello world";
 
 /**
  * (2) reassignment is fine
  */
-// x = "hello mars";
+x = "hello mars";
 
 /**
  * (3) but if we try to change type
  */
-// x = 42; // 🚨 ERROR
+x = 42; // 🚨 ERROR
 
 /**
  * (4) let's look at const. The type is literally 'hello world'
  */
-// const y = "hello world";
+const y = "hello world";
 
 /**
  * This is called a 'string literal type'. y can never be reassigned since it's a const,
@@ -29,9 +29,9 @@
 /**
  * (5) sometimes we need to declare a variable w/o initializing it
  */
-// let z;
-// z = 41;
-// z = "abc"; // (6) oh no! This isn't good
+let z;
+z = 41;
+z = "abc"; // (6) oh no! This isn't good
 
 /**
  * If we look at the type of z, it's `any`. This is the most flexible type
