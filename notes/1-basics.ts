@@ -42,30 +42,32 @@ z = "abc"; // (6) oh no! This isn't good
  * (7) we could improve this situation by providing a type annotation
  * when we declare our variable
  */
-// let zz: number;
-// zz = 41;
-// zz = "abc"; // 🚨 ERROR Type '"abc"' is not assignable to type 'number'.
+let zz: number;
+zz = 41;
+zz = "abc"; // 🚨 ERROR Type '"abc"' is not assignable to type 'number'.
 
 //== SIMPLE ARRAYS ==//
 
 /**
  * (8) simple array types can be expressed using []
  */
-// let aa: number[] = [];
-// aa.push(33);
-// aa.push("abc"); // 🚨 ERROR: Argument of type '"abc"' is not assignable to parameter of type 'number'.
+let aa: number[] = [];
+aa.push(33);
+aa.push("abc"); // 🚨 ERROR: Argument of type '"abc"' is not assignable to parameter of type 'number'.
 
 /**
  * (9) we can even define a tuple, which has a fixed length
  */
-// let bb: [number, string, string, number] = [
-//   123,
-//   "Fake Street",
-//   "Nowhere, USA",
-//   10110
-// ];
+let bb: [number, string, string, number] = [
+    123,
+    "Fake Street",
+    "Nowhere, USA",
+    10110
+];
 
-// bb = [1, 2, 3]; // 🚨 ERROR: Type 'number' is not assignable to type 'string'.
+bb = [1, 2, 3]; // 🚨 ERROR: Type 'number' is not assignable to type 'string'.
+// NOTE: we do NOT get type safety with `.push()`:
+bb.push(1, 4, 4, 4, 4, 4, 4, 4);
 
 /**
  * (10) Tuple values often require type annotations (  : [number, number] )
