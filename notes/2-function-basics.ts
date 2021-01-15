@@ -48,14 +48,14 @@ function contactPeople(method: "phone", ...people: HasPhoneNumber[]): void;
 
 "function implementation"
 function contactPeople(
-  method: "email" | "phone",
-  ...people: (HasEmail | HasPhoneNumber)[]
+    method: "email" | "phone",
+    ...people: (HasEmail | HasPhoneNumber)[]
 ): void {
-  if (method === "email") {
-    (people as HasEmail[]).forEach(sendEmail);
-  } else {
-    (people as HasPhoneNumber[]).forEach(sendTextMessage);
-  }
+    if (method === "email") {
+        (people as HasEmail[]).forEach(sendEmail);
+    } else {
+        (people as HasPhoneNumber[]).forEach(sendTextMessage);
+    }
 }
 // contactPeople()
 
@@ -70,32 +70,33 @@ contactPeople("email", { name: "foo", phone: 12345678 });
 
 // (6) the lexical scope (this) of a function is part of its signature
 
-// function sendMessage(
-//   this: HasEmail & HasPhoneNumber,
-//   preferredMethod: "phone" | "email"
-// ) {
-//   if (preferredMethod === "email") {
-//     console.log("sendEmail");
-//     sendEmail(this);
-//   } else {
-//     console.log("sendTextMessage");
-//     sendTextMessage(this);
-//   }
-// }
-// const c = { name: "Mike", phone: 3215551212, email: "mike@example.com" };
+function sendMessage(
+    // NOTE: `this` here is a pseudo-argument, the function still only accepts one argument (i.e. `preferredMethod`)
+    this: HasEmail & HasPhoneNumber,
+    preferredMethod: "phone" | "email"
+) {
+    if (preferredMethod === "email") {
+        console.log("sendEmail");
+        sendEmail(this);
+    } else {
+        console.log("sendTextMessage");
+        sendTextMessage(this);
+    }
+}
+const c = { name: "Mike", phone: 3215551212, email: "mike@example.com" };
 
-// function invokeSoon(cb: () => any, timeout: number) {
-//   setTimeout(() => cb.call(null), timeout);
-// }
+function invokeSoon(cb: () => any, timeout: number) {
+    setTimeout(() => cb.call(null), timeout);
+}
 
 // 🚨 this is not satisfied
-// invokeSoon(() => sendMessage("email"), 500);
+invokeSoon(() => sendMessage("email"), 500);
 
 // ✅ creating a bound function is one solution
-// const bound = sendMessage.bind(c, "email");
-// invokeSoon(() => bound(), 500);
+const bound = sendMessage.bind(c, "email");
+invokeSoon(() => bound(), 500);
 
 // ✅ call/apply works as well
-// invokeSoon(() => sendMessage.apply(c, ["phone"]), 500);
+invokeSoon(() => sendMessage.apply(c, ["phone"]), 500);
 
 export default {};
