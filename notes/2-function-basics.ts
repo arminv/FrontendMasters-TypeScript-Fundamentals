@@ -43,8 +43,8 @@ console.log(sum(3, 4, 6)); // 13
 
 // (5) we can even provide multiple function signatures
 // "overload signatures"
-// function contactPeople(method: "email", ...people: HasEmail[]): void;
-// function contactPeople(method: "phone", ...people: HasPhoneNumber[]): void;
+function contactPeople(method: "email", ...people: HasEmail[]): void;
+function contactPeople(method: "phone", ...people: HasPhoneNumber[]): void;
 
 "function implementation"
 function contactPeople(
@@ -57,15 +57,16 @@ function contactPeople(
     (people as HasPhoneNumber[]).forEach(sendTextMessage);
   }
 }
+// contactPeople()
 
 // ✅ email works
 contactPeople("email", { name: "foo", email: "" });
 
 // ✅ phone works
-// contactPeople("phone", { name: "foo", phone: 12345678 });
+contactPeople("phone", { name: "foo", phone: 12345678 });
 
 // 🚨 mixing does not work
-// contactPeople("email", { name: "foo", phone: 12345678 });
+contactPeople("email", { name: "foo", phone: 12345678 });
 
 // (6) the lexical scope (this) of a function is part of its signature
 
