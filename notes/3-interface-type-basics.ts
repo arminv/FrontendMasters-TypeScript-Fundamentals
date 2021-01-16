@@ -60,15 +60,15 @@ interface ContactConstructor {
  * }
  */
 
-// interface PhoneNumberDict {
-//   // arr[0],  foo['myProp']
-//   [numberName: string]:
-//     | undefined
-//     | {
-//         areaCode: number;
-//         num: number;
-//       };
-// }
+interface PhoneNumberDict {
+  // arr[0],  foo['myProp']
+  [numberName: string]:
+  | undefined
+  | {
+    areaCode: number;
+    num: number;
+  };
+}
 
 // const phoneDict: PhoneNumberDict = {
 //   office: { areaCode: 321, num: 5551212 },
