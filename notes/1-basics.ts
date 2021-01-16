@@ -59,10 +59,10 @@ aa.push("abc"); // 🚨 ERROR: Argument of type '"abc"' is not assignable to par
  * (9) we can even define a tuple, which has a fixed length
  */
 let bb: [number, string, string, number] = [
-    123,
-    "Fake Street",
-    "Nowhere, USA",
-    10110
+  123,
+  "Fake Street",
+  "Nowhere, USA",
+  10110
 ];
 
 bb = [1, 2, 3]; // 🚨 ERROR: Type 'number' is not assignable to type 'string'.
@@ -132,15 +132,15 @@ export interface HasEmail {
 let contactInfo: HasEmail | HasPhoneNumber =
   Math.random() > 0.5
     ? {
-        // we can assign it to a HasPhoneNumber
-        name: "Mike",
-        phone: 3215551212
-      }
+      // we can assign it to a HasPhoneNumber
+      name: "Mike",
+      phone: 3215551212
+    }
     : {
-        // or a HasEmail
-        name: "Mike",
-        email: "mike@example.com"
-      };
+      // or a HasEmail
+      name: "Mike",
+      email: "mike@example.com"
+    };
 
 contactInfo.name; // NOTE: we can only access the .name property  (the stuff HasPhoneNumber and HasEmail have in common)
 

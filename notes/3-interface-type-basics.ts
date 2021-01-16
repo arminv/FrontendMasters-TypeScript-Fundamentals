@@ -4,10 +4,10 @@ import { HasPhoneNumber, HasEmail } from "./1-basics";
 /**
  * (1) Type aliases allow us to give a type a name
  */
-// type StringOrNumber = string | number;
+type StringOrNumber = string | number;
 
-// // this is the ONLY time you'll see a type on the RHS of assignment
-// type HasName = { name: string };
+// this is the ONLY time you'll see a type on the RHS of assignment
+type HasName = { name: string };
 
 // NEW in TS 3.7: Self-referencing types!
 type NumVal = 1 | 2 | 3 | NumVal[];
@@ -16,36 +16,37 @@ type NumVal = 1 | 2 | 3 | NumVal[];
 /**
  * (2) Interfaces can extend from other interfaces
  */
+// NOTE: As a general rule, Interfaces can handle anything that has a prototype (e.g. Objects, Arrays, etc.)
 
-// export interface HasInternationalPhoneNumber extends HasPhoneNumber {
-//   countryCode: string;
-// }
+export interface HasInternationalPhoneNumber extends HasPhoneNumber {
+  countryCode: string;
+}
 
 /**
  * (3) they can also be used to describe call signatures
  */
 
-// interface ContactMessenger1 {
-//   (contact: HasEmail | HasPhoneNumber, message: string): void;
-// }
+interface ContactMessenger1 {
+  (contact: HasEmail | HasPhoneNumber, message: string): void;
+}
 
-// type ContactMessenger2 = (
-//   contact: HasEmail | HasPhoneNumber,
-//   message: string
-// ) => void;
+type ContactMessenger2 = (
+  contact: HasEmail | HasPhoneNumber,
+  message: string
+) => void;
 
-// // NOTE: we don't need type annotations for contact or message
-// const emailer: ContactMessenger1 = (_contact, _message) => {
-//   /** ... */
-// };
+// NOTE: we don't need type annotations for contact or message - same thing happens with callbacks, type checking happens without us having to provide types explicitly!
+const emailer: ContactMessenger1 = (_contact, _message) => {
+  /** ... */
+};
 
 /**
  * (4) construct signatures can be described as well
  */
 
-// interface ContactConstructor {
-//   new (...args: any[]): HasEmail | HasPhoneNumber;
-// }
+interface ContactConstructor {
+  new(...args: any[]): HasEmail | HasPhoneNumber;
+}
 
 /**
  * (5) index signatures describe how a type will respond to property access
