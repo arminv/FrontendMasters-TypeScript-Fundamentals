@@ -7,14 +7,14 @@ import { HasPhoneNumber, HasEmail } from "./1-basics";
  * -   They can "implement" interfaces
  */
 
-// export class Contact implements HasEmail {
-//   email: string;
-//   name: string;
-//   constructor(name: string, email: string) {
-//     this.email = email;
-//     this.name = name;
-//   }
-// }
+export class Contact implements HasEmail {
+    email: string;
+    name: string;
+    constructor(name: string, email: string) {
+        this.email = email;
+        this.name = name;
+    }
+}
 
 /**
  * (2) This looks a little verbose -- we have to specify the words "name" and "email" 3x.
@@ -29,11 +29,11 @@ import { HasPhoneNumber, HasEmail } from "./1-basics";
  * - private - only me
  */
 
-// class ParamPropContact implements HasEmail {
-//   constructor(public name: string, public email: string = "no email") {
-//     // nothing needed
-//   }
-// }
+class ParamPropContact implements HasEmail {
+    constructor(public name: string, public email: string = "no email") {
+        // nothing needed
+    }
+}
 
 /**
  * (4) Class fields can have initializers (defaults)
