@@ -8,12 +8,12 @@ import { HasPhoneNumber, HasEmail } from "./1-basics";
  */
 
 export class Contact implements HasEmail {
-    email: string;
-    name: string;
-    constructor(name: string, email: string) {
-        this.email = email;
-        this.name = name;
-    }
+  email: string;
+  name: string;
+  constructor(name: string, email: string) {
+    this.email = email;
+    this.name = name;
+  }
 }
 
 /**
@@ -30,17 +30,20 @@ export class Contact implements HasEmail {
  */
 
 class ParamPropContact implements HasEmail {
-    // NOTE: if an interface requires certain fields to exist, making any of the fields/properties here (e.g. `name`, `email`) would cause a problem!
-    constructor(public name: string, public email: string = "no email") {
-        // nothing needed
-    }
+  // NOTE: if an interface requires certain fields to exist, making any of the fields/properties here (e.g. `name`, `email`) would cause a problem!
+  constructor(public name: string, public email: string = "no email") {
+    // nothing needed
+  }
 }
 
 /**
  * (4) Class fields can have initializers (defaults)
  */
 class OtherContact implements HasEmail, HasPhoneNumber {
+  // NOTE: TS will still try to `infer` the type even when we have a given a default value - make sure to specify any other valid type, or TS will only allow for the type it infers!
   protected age: number = 0;
+  // NOTE: we can also use `readonly` and TS will still complain in the same way as when we use access modifier keywords (i.e. public, protected, private):
+  // readonly age: number = 0;
   // private password: string;
   constructor(public name: string, public email: string, public phone: number) {
     // () password must either be initialized like this, or have a default value
