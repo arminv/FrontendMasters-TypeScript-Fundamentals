@@ -44,10 +44,11 @@ class OtherContact implements HasEmail, HasPhoneNumber {
   protected age: number = 0;
   // NOTE: we can also use `readonly` and TS will still complain in the same way as when we use access modifier keywords (i.e. public, protected, private):
   // readonly age: number = 0;
-  // private password: string;
+  private password: string;
   constructor(public name: string, public email: string, public phone: number) {
-    // () password must either be initialized like this, or have a default value
-    // this.password = Math.round(Math.random() * 1e14).toString(32);
+    // () password must either be initialized like this, or have a default value - try commenting out the line below!
+    // NOTE: one way to fix this is to have `private password: string | undefined` (i.e. allow for `password` to also be undefined, this way TS will not complain)
+    this.password = Math.round(Math.random() * 1e14).toString(32);
   }
 }
 
