@@ -5,20 +5,20 @@ import { HasEmail } from "./1-basics";
  * -   functions parameterize values
  */
 
-// // param determines the value of x
-// function wrappedValue(x: any) {
-//   return {
-//     value: x
-//   };
-// }
+// param determines the value of x
+function wrappedValue(x: any) {
+    return {
+        value: x
+    };
+}
 
-// // type param determines the type of x
-// interface WrappedValue<X> {
-//   value: X;
-// }
+// type param determines the type of x
+interface WrappedValue<X> {
+    value: X;
+}
 
-// let val: WrappedValue<string[]> = { value: [] };
-// val.value;
+let val: WrappedValue<string[]> = { value: [] };
+val.value;
 
 /**
  * we can name these params whatever we want, but a common convention
