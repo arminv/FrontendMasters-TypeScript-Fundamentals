@@ -30,21 +30,21 @@ val.value;
  * -   just like function parameters can have default values
  */
 
-// // for Array.prototype.filter
-// interface FilterFunction<T = any> {
-//   (val: T): boolean;
-// }
+// for Array.prototype.filter
+interface FilterFunction<T = any> {
+  (val: T): boolean;
+}
 
-// const stringFilter: FilterFunction<string> = val => typeof val === "string";
-// stringFilter(0); // 🚨 ERROR
-// stringFilter("abc"); // ✅ OK
+const stringFilter: FilterFunction<string> = val => typeof val === "string";
+stringFilter(0); // 🚨 ERROR
+stringFilter("abc"); // ✅ OK
 
-// // can be used with any value
-// const truthyFilter: FilterFunction = val => val;
-// truthyFilter(0); // false
-// truthyFilter(1); // true
-// truthyFilter(""); // false
-// truthyFilter(["abc"]); // true
+// can be used with any value
+const truthyFilter: FilterFunction = val => val;
+truthyFilter(0); // false
+truthyFilter(1); // true
+truthyFilter(""); // false
+truthyFilter(["abc"]); // true
 
 /**
  * (3) You don't have to use exactly your type parameter as an arg
