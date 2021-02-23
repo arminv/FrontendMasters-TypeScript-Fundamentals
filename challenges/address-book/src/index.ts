@@ -1,5 +1,3 @@
-interface Person { firstName?: string, middleName?: string, lastName?: string }
-
 export class AddressBook {
   // NOTE: `contacts` will be an array of `Persons`:
   contacts: Person[] = [];
@@ -45,7 +43,21 @@ function getFullName(contact: Person) {
     .join(" ");
 }
 
-export function getVcardText(contact, date = new Date()) {
+interface Person {
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  salutation?: string;
+  phones: {
+    // NOTE: `[k: ]` indicates an `index signature`:
+    [k: string]: any;
+  };
+  addresses: {
+    [k: string]: any;
+  };
+}
+
+export function getVcardText(contact: Person, date = new Date()) {
   const parts = [
     "BEGIN:VCARD",
     "VERSION:2.1",
