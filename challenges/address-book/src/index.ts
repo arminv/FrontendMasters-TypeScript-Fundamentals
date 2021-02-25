@@ -43,17 +43,26 @@ function getFullName(contact: Person) {
     .join(" ");
 }
 
+// NOTE: we can also use commas at the end of line while defining an interface!
 interface Person {
   firstName?: string;
   middleName?: string;
   lastName?: string;
   salutation?: string;
+  email?: string;
   phones: {
     // NOTE: `[k: ]` indicates an `index signature`:
-    [k: string]: any;
+    [k: string]: string;
   };
   addresses: {
-    [k: string]: any;
+    [k: string]: {
+      houseNumber: number;
+      street: string;
+      city: string;
+      state: string;
+      postalCode: number;
+      country: string;
+    };
   };
 }
 
