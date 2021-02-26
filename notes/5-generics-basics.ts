@@ -32,7 +32,7 @@ val.value;
 
 // for Array.prototype.filter
 interface FilterFunction<T = any> {
-  (val: T): boolean;
+    (val: T): boolean;
 }
 
 const stringFilter: FilterFunction<string> = val => typeof val === "string";
@@ -51,21 +51,21 @@ truthyFilter(["abc"]); // true
  * -   things that are based on your type parameter are fine too
  */
 
-// function resolveOrTimeout<T>(promise: Promise<T>, timeout: number): Promise<T> {
-//   return new Promise<T>((resolve, reject) => {
-//     // start the timeout, reject when it triggers
-//     const task = setTimeout(() => reject("time up!"), timeout);
+function resolveOrTimeout<T>(promise: Promise<T>, timeout: number): Promise<T> {
+    return new Promise<T>((resolve, reject) => {
+        // start the timeout, reject when it triggers
+        const task = setTimeout(() => reject("time up!"), timeout);
 
-//     promise.then(val => {
-//       // cancel the timeout
-//       clearTimeout(task);
+        promise.then(val => {
+            // cancel the timeout
+            clearTimeout(task);
 
-//       // resolve with the value
-//       resolve(val);
-//     });
-//   });
-// }
-// resolveOrTimeout(fetch(""), 3000);
+            // resolve with the value
+            resolve(val);
+        });
+    });
+}
+resolveOrTimeout(fetch(""), 3000);
 
 /**
  * (4) Type parameters can have constraints
