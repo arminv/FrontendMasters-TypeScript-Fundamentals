@@ -50,7 +50,7 @@ truthyFilter(["abc"]); // true
  * (3) You don't have to use exactly your type parameter as an arg
  * -   things that are based on your type parameter are fine too
  */
-
+// NOTE: this means we expect a Promise, that once resolved, can return a value of type T (which can be different types)
 function resolveOrTimeout<T>(promise: Promise<T>, timeout: number): Promise<T> {
     return new Promise<T>((resolve, reject) => {
         // start the timeout, reject when it triggers
@@ -71,18 +71,18 @@ resolveOrTimeout(fetch(""), 3000);
  * (4) Type parameters can have constraints
  */
 
-// function arrayToDict<T extends { id: string }>(array: T[]): { [k: string]: T } {
-//   const out: { [k: string]: T } = {};
-//   array.forEach(val => {
-//     out[val.id] = val;
-//   });
-//   return out;
-// }
+function arrayToDict<T extends { id: string }>(array: T[]): { [k: string]: T } {
+    const out: { [k: string]: T } = {};
+    array.forEach(val => {
+        out[val.id] = val;
+    });
+    return out;
+}
 
-// const myDict = arrayToDict([
-//   { id: "a", value: "first", lisa: "Huang" },
-//   { id: "b", value: "second" }
-// ]);
+const myDict = arrayToDict([
+    { id: "a", value: "first", lisa: "Huang" },
+    { id: "b", value: "second" }
+]);
 
 /**
  * (5) Type parameters are associated with scopes, just like function arguments
