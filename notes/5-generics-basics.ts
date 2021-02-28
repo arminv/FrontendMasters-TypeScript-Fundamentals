@@ -68,9 +68,11 @@ function resolveOrTimeout<T>(promise: Promise<T>, timeout: number): Promise<T> {
 resolveOrTimeout(fetch(""), 3000);
 
 /**
- * (4) Type parameters can have constraints
+ * (4) Type parameters can have constraints (Note the `extends` keyword)
  */
 
+//  NOTE: the advantage here is that we can at least specify one property (`id` in this case) for the purposes of this one function, while allowing flexibility
+// in case there are other properties that could also be defined on our object (which we don't know about yet, at least inside this function!):
 function arrayToDict<T extends { id: string }>(array: T[]): { [k: string]: T } {
     const out: { [k: string]: T } = {};
     array.forEach(val => {
@@ -89,9 +91,10 @@ const myDict = arrayToDict([
  */
 
 function startTuple<T>(a: T) {
-  return function finishTuple<U>(b: U) {
-    return [a, b] as [T, U];
-  };
+    // NOTE: for example on this line, we don't yet have access to type `U` (because of scope)!
+    return function finishTuple<U>(b: U) {
+        return [a, b] as [T, U];
+    };
 }
 const myTuple = startTuple(["first"])(42);
 
