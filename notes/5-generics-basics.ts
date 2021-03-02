@@ -108,18 +108,19 @@ const myTuple = startTuple(["first"])(42);
  * - it can probably be eliminated
  */
 
-// interface Shape {
-//   draw();
-// }
-// interface Circle extends Shape {
-//   radius: number;
-// }
+interface Shape {
+    draw();
+}
+interface Circle extends Shape {
+    radius: number;
+}
 
-// function drawShapes1<S extends Shape>(shapes: S[]) {
-//   shapes.forEach(s => s.draw());
-// }
+// NOTE: the following two functions compile to the exact same thing!
+function drawShapes1<S extends Shape>(shapes: S[]) {
+    shapes.forEach(s => s.draw());
+}
 
-// function drawShapes2(shapes: Shape[]) {
-//   // this is simpler. Above type param is not necessary
-//   shapes.forEach(s => s.draw());
-// }
+function drawShapes2(shapes: Shape[]) {
+    // this is simpler. Above type param is not necessary - we are only using this type parameter once, so we can always remove it and use this simpler approach!
+    shapes.forEach(s => s.draw());
+}
