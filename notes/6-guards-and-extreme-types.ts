@@ -6,23 +6,23 @@ import { HasEmail } from "./1-basics";
  * (1) "Top types" are types that can hold any value. Typescript has two of them
  */
 
-// let myAny: any = 32;
-// let myUnknown: unknown = "hello, unknown";
+let myAny: any = 32;
+let myUnknown: unknown = "hello, unknown";
 
 // Note that we can do whatever we want with an any, but nothing with an unknown
 
-// myAny.foo.bar.baz;
-// myUnknown.foo;
+myAny.foo.bar.baz;
+myUnknown.foo;
 
 /**
  * (2) When to use `any`
  * Anys are good for areas of our programs where we want maximum flexibility
  * Example: sometimes a Promise<any> is fine when we don't care at all about the resolved value
  */
-// async function logWhenResolved(p: Promise<any>) {
-//   const val = await p;
-//   console.log("Resolved to: ", val);
-// }
+async function logWhenResolved(p: Promise<any>) {
+    const val = await p;
+    console.log("Resolved to: ", val);
+}
 
 /**
  * (3) When to use `unknown`
@@ -32,7 +32,7 @@ import { HasEmail } from "./1-basics";
  * We'll do htis with a type guard.
  */
 
-// myUnknown.split(", "); // 🚨 ERROR
+myUnknown.split(", "); // 🚨 ERROR
 
 /**
  * (4) Built-in type guards
