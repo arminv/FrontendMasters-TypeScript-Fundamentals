@@ -37,45 +37,48 @@ myUnknown.split(", "); // 🚨 ERROR
 /**
  * (4) Built-in type guards
  */
-// if (typeof myUnknown === "string") {
-//   // in here, myUnknown is of type string
-//   myUnknown.split(", "); // ✅ OK
-// }
-// if (myUnknown instanceof Promise) {
-//   // in here, myUnknown is of type Promise<any>
-//   myUnknown.then(x => console.log(x));
-// }
+if (typeof myUnknown === "string") {
+    // in here, myUnknown is of type string
+    myUnknown.split(", "); // ✅ OK
+}
+if (myUnknown instanceof Promise) {
+    // in here, myUnknown is of type Promise<any>
+    myUnknown.then(x => console.log(x));
+}
 
 /**
  * (5) User-defined type guards
  * We can also create our own type guards, using functions that return booleans
  */
 
-// // 💡 Note return type
-// function isHasEmail(x: any): x is HasEmail {
-//   return typeof x.name === "string" && typeof x.email === "string";
-// }
+// 💡 Note return type
+function isHasEmail(x: any): x is HasEmail {
+    return typeof x.name === "string" && typeof x.email === "string";
+}
 
-// if (isHasEmail(myUnknown)) {
-//   // In here, myUnknown is of type HasEmail
-//   console.log(myUnknown.name, myUnknown.email);
-// }
+if (isHasEmail(myUnknown)) {
+    // In here, myUnknown is of type HasEmail
+    console.log(myUnknown.name, myUnknown.email);
+}
 
-// // my most common guard
-// function isDefined<T>(arg: T | undefined): arg is T {
-//   return typeof arg !== "undefined";
-// }
+// my most common guard
+function isDefined<T>(arg: T | undefined): arg is T {
+    return typeof arg !== "undefined";
+}
+// NOTE: we can use it in cases like this - very useful:
+const myArray = ['a', 'b', 'c', undefined, 'e'];
+const filtered = myArray.filter(isDefined);
 
-// // NEW TS 3.7: assertion-based type guards!
-// function assertIsStringArray(arr: any[]): asserts arr is string[] {
-//   if (!arr) throw new Error('not an array!');
-//   const strings = arr.filter(i => typeof i === 'string');
-//   if (strings.length !== arr.length) throw new Error('not an array of strings');
-// }
+// NEW TS 3.7: assertion-based type guards!
+function assertIsStringArray(arr: any[]): asserts arr is string[] {
+    if (!arr) throw new Error('not an array!');
+    const strings = arr.filter(i => typeof i === 'string');
+    if (strings.length !== arr.length) throw new Error('not an array of strings');
+}
 
-// const arr: (string|number)[] = ['3', 12, '21'];
-// assertIsStringArray(arr);
-// arr;
+const arr: (string | number)[] = ['3', 12, '21'];
+assertIsStringArray(arr);
+arr;
 
 /**
  * (6) Dealing with multiple unknowns
