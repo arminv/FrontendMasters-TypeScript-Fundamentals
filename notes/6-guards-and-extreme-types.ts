@@ -136,43 +136,44 @@ let revealedB = unbrandB(secretB);
 /**
  * (8) Bottom types can hold no values. TypeScript has one of these: `never`
  */
-// let n: never = 4;
+let n: never = 4;
 
 /**
  * A common place where you'll end up with a never
  * is through narrowing exhaustively
  */
 
-// let x = "abc" as string | number;
+let x = "abc" as string | number;
 
-// if (typeof x === "string") {
-//   // x is a string here
-//   x.split(", ");
-// } else if (typeof x === "number") {
-//   // x is a number here
-//   x.toFixed(2);
-// } else {
-//   // x is a never here
-// }
+if (typeof x === "string") {
+    // x is a string here
+    x.split(", ");
+} else if (typeof x === "number") {
+    // x is a number here
+    x.toFixed(2);
+} else {
+    // x is a never here
+}
 
 /**
  * (9) We can use this to our advantage to create exhaustive conditionals and switches
  */
 
-// class UnreachableError extends Error {
-//   constructor(val: never, message: string) {
-//     super(`TypeScript thought we could never end up here\n${message}`);
-//   }
-// }
+class UnreachableError extends Error {
+    constructor(val: never, message: string) {
+        super(`TypeScript thought we could never end up here\n${message}`);
+    }
+}
 
-// let y = 4 as string | number;
+let y = 4 as string | number;
 
-// if (typeof y === "string") {
-//   // y is a string here
-//   y.split(", ");
-// } else if (typeof y === "number") {
-//   // y is a number here
-//   y.toFixed(2);
-// } else {
-//   throw new UnreachableError(y, "y should be a string or number");
-// }
+// This is called an `Exhaustive Switch` as it handles all possible cases:
+if (typeof y === "string") {
+    // y is a string here
+    y.split(", ");
+} else if (typeof y === "number") {
+    // y is a number here
+    y.toFixed(2);
+} else {
+    throw new UnreachableError(y, "y should be a string or number");
+}
