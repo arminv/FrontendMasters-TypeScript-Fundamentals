@@ -1,3 +1,4 @@
+// NOTE: wildcard imports are kind of specific to TS (and not JS):
 import * as path from "path";
 import * as ts from "typescript";
 
@@ -7,7 +8,9 @@ function isDefined<T>(x: T | undefined): x is T {
 
 // (1) Create the program
 const program = ts.createProgram({
+  // NOTE: conceptually, this `options` is equivalent to out `tsconfig.json`:
   options: {
+    module: ts.ModuleKind.CommonJS,
     target: ts.ScriptTarget.ESNext
   },
   rootNames: [
@@ -17,9 +20,9 @@ const program = ts.createProgram({
 });
 
 // // (2) Get the non-declaration (.d.ts) source files (.ts)
-// const nonDeclFiles = program
-//   .getSourceFiles()
-//   .filter(sf => !sf.isDeclarationFile);
+const nonDeclFiles = program
+  .getSourceFiles()
+  .filter(sf => !sf.isDeclarationFile);
 
 // // (3) get the type-checker
 // const checker = program.getTypeChecker();
